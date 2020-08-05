@@ -25,13 +25,11 @@ public class LightServiceImpl implements LightService {
     @Override
     public LightDto saveStatus(LightDto lightDto) {
         Light l = lightRepository.findByNumber(lightDto.getNumber());
-        log.info(l.toString());
         return modelMapper.map(lightRepository.save(Objects.nonNull(l) ? l : modelMapper.map(lightDto, Light.class)), LightDto.class);
     }
 
     @Override
-    public Integer findStatus(Long number) {
-        log.info(number.toString());
-        return lightRepository.findByNumber(number).getStatus();
+    public LightDto findStatus(String number) {
+        return modelMapper.map(lightRepository.findByNumber(number), LightDto.class);
     }
 }

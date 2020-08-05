@@ -10,7 +10,7 @@ import lombok.*;
 public class LightDto {
 
     private String id;
-    private Long number;
+    private String number;
     private Integer status;
     private Long usageTime;
 }

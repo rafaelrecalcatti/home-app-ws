@@ -21,17 +21,17 @@ public class LightController {
 
     @ResponseStatus(code = HttpStatus.FOUND)
     @RequestMapping(value = "/light/{number}", method = RequestMethod.GET)
-    Integer get(@PathVariable Long number) {
+    ResponseEntity<LightDto> get(@PathVariable String number) {
 
         ResponseEntity responseEntity = null;
-        Integer status = lightService.findStatus(number);
+        LightDto lightDto = lightService.findStatus(number);
 
-        if (Objects.nonNull(status)) {
-            responseEntity = ResponseEntity.status(HttpStatus.FOUND).body(status);
+        if (Objects.nonNull(lightDto)) {
+            responseEntity = ResponseEntity.status(HttpStatus.FOUND).body(lightDto);
         } else {
             responseEntity = ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro ao buscar status da lampada.");
         }
-        return status;
+        return responseEntity;
     }
 
 

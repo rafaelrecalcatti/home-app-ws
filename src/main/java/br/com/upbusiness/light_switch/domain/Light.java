@@ -17,7 +17,7 @@ public class Light {
     private String id;
 
     @Indexed(unique = true)
-    private Long number;
+    private String number;
 
     private Integer status;
 

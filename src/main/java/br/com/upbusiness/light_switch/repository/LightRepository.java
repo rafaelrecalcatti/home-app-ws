@@ -5,5 +5,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface LightRepository extends MongoRepository<Light, String> {
 
-    Light findByNumber(Long number);
+    Light findByNumber(String number);
 }
