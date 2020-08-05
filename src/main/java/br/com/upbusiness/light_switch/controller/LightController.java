@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Objects;
 
 
@@ -20,14 +21,14 @@ public class LightController {
     private LightService lightService;
 
     @ResponseStatus(code = HttpStatus.FOUND)
-    @RequestMapping(value = "/light/{number}", method = RequestMethod.GET)
-    ResponseEntity<LightDto> get(@PathVariable String number) {
+    @RequestMapping(value = "/light/all", method = RequestMethod.GET)
+    ResponseEntity<List<LightDto>> get() {
 
         ResponseEntity responseEntity = null;
-        LightDto lightDto = lightService.findStatus(number);
+        List<LightDto> lightDtoList = lightService.findAll();
 
-        if (Objects.nonNull(lightDto)) {
-            responseEntity = ResponseEntity.status(HttpStatus.FOUND).body(lightDto);
+        if (Objects.nonNull(lightDtoList)) {
+            responseEntity = ResponseEntity.status(HttpStatus.FOUND).body(lightDtoList);
         } else {
             responseEntity = ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro ao buscar status da lampada.");
         }
@@ -37,13 +38,13 @@ public class LightController {
 
     @PostMapping(value = "/light")
     @ResponseStatus(code = HttpStatus.CREATED)
-    ResponseEntity<LightDto> post(@RequestBody LightDto lightDto) {
+    ResponseEntity<LightDto> post(@RequestBody List<LightDto> lightDtoList) {
 
         ResponseEntity responseEntity = null;
-        LightDto lightDtoResponse = lightService.saveStatus(lightDto);
+        Boolean b = lightService.saveStatus(lightDtoList);
 
-        if (Objects.nonNull(lightDtoResponse)) {
-            responseEntity = ResponseEntity.status(HttpStatus.OK).body(lightDtoResponse);
+        if (Objects.nonNull(b)) {
+            responseEntity = ResponseEntity.status(HttpStatus.OK).body(b);
         } else {
             responseEntity = ResponseEntity.status(HttpStatus.CONFLICT).body("Erro ao salavar sattus lampada");
         }

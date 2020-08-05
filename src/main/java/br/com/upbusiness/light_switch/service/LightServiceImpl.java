@@ -9,7 +9,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -23,13 +24,17 @@ public class LightServiceImpl implements LightService {
 
 
     @Override
-    public LightDto saveStatus(LightDto lightDto) {
-        Light light = lightRepository.save(modelMapper.map(lightDto, Light.class));
-        return modelMapper.map(light, LightDto.class);
+    public Boolean saveStatus(List<LightDto> lightDtoList) {
+        try {
+            lightDtoList.stream().forEach(l -> lightRepository.save(modelMapper.map(l, Light.class)));
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public LightDto findStatus(String number) {
-        return modelMapper.map(lightRepository.findByNumber(number), LightDto.class);
+    public List<LightDto> findAll() {
+        return lightRepository.findAll().stream().map(l -> modelMapper.map(l, LightDto.class)).collect(Collectors.toList());
     }
 }
