@@ -24,8 +24,8 @@ public class LightServiceImpl implements LightService {
 
     @Override
     public LightDto saveStatus(LightDto lightDto) {
-        Light l = lightRepository.findByNumber(lightDto.getNumber());
-        return modelMapper.map(lightRepository.save(Objects.nonNull(l) ? l : modelMapper.map(lightDto, Light.class)), LightDto.class);
+        Light light = lightRepository.save(modelMapper.map(lightDto, Light.class));
+        return modelMapper.map(light, LightDto.class);
     }
 
     @Override

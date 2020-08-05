@@ -35,9 +35,9 @@ public class LightController {
     }
 
 
-    @PostMapping(value = "/light/add")
+    @PostMapping(value = "/light")
     @ResponseStatus(code = HttpStatus.CREATED)
-    ResponseEntity<LightDto> save(@RequestBody LightDto lightDto) {
+    ResponseEntity<LightDto> post(@RequestBody LightDto lightDto) {
 
         ResponseEntity responseEntity = null;
         LightDto lightDtoResponse = lightService.saveStatus(lightDto);
