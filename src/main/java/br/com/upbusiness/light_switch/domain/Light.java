@@ -6,6 +6,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
+
 @Data
 @ToString
 @Builder
@@ -22,6 +24,10 @@ public class Light {
     private String number;
 
     private Integer status;
+
+    private LocalDateTime dateTimeOn;
+
+    private LocalDateTime dateTimeOff;
 
     private Long usageTime;
 

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -42,6 +43,12 @@ public class LightController {
 
         ResponseEntity responseEntity = null;
         Boolean b = lightService.saveStatus(lightDtoList);
+        lightDtoList.stream().forEach(
+                lightDto -> {
+                    lightDto.setDateTimeOn(lightDto.getStatus() == 1 ? LocalDateTime.now() : lightDto.getDateTimeOn());
+                    lightDto.setDateTimeOff(lightDto.getStatus() == 0 ? LocalDateTime.now() :  lightDto.getDateTimeOff());
+                }
+        );
 
         if (Objects.nonNull(b)) {
             responseEntity = ResponseEntity.status(HttpStatus.OK).body(b);
