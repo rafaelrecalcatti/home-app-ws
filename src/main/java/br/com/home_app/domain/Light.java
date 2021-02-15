@@ -1,4 +1,4 @@
-package br.com.upbusiness.light_switch.domain;
+package br.com.home_app.domain;
 
 import lombok.*;
 import lombok.experimental.Wither;
@@ -11,23 +11,28 @@ import java.time.LocalDateTime;
 @Data
 @ToString
 @Builder
-@Wither
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "light")
-public class Light {
+//@Document(collection = "light")
+class Light {
 
-    @Id
+    //@Id
     private String id;
 
-    @Indexed(unique = true)
+    //@Indexed(unique = true)
+    private String portLight;
+
+    //@Indexed(unique = true)
+    private String portSensor;
+
+    //@Indexed(unique = true)
     private String number;
 
     private Integer status;
 
-    private LocalDateTime dateTimeOn;
+    private Long dateTimeOn;
 
-    private LocalDateTime dateTimeOff;
+    private Long dateTimeOff;
 
     private Long usageTime;
 

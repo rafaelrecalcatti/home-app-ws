@@ -1,4 +1,4 @@
-package br.com.upbusiness.light_switch.configuration;
+package br.com.home_app.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
